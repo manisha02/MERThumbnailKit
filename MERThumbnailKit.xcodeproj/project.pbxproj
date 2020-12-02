@@ -56,9 +56,7 @@
 		79B4366619133D3100FB4832 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B4366519133D3100FB4832 /* AVFoundation.framework */; };
 		79B4366819133D3600FB4832 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B4366719133D3600FB4832 /* Accelerate.framework */; };
 		79B4368019134C6200FB4832 /* MERThumbnailKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B4350919130E2000FB4832 /* MERThumbnailKit.framework */; };
-		79B4368219135CD700FB4832 /* Files in Resources */ = {isa = PBXBuildFile; fileRef = 79B4368119135CD700FB4832 /* Files */; };
-		79B4368319135CD700FB4832 /* Files in Resources */ = {isa = PBXBuildFile; fileRef = 79B4368119135CD700FB4832 /* Files */; };
-		79B4368A19137E0000FB4832 /* UIWebView+MERThumbnailKitExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B4368919137E0000FB4832 /* UIWebView+MERThumbnailKitExtensions.m */; };
+		79B4368A19137E0000FB4832 /* WKWebView+MERThumbnailKitExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B4368919137E0000FB4832 /* WKWebView+MERThumbnailKitExtensions.m */; };
 		79B4368C1913913500FB4832 /* RemoteURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79B4368B1913913500FB4832 /* RemoteURLs.plist */; };
 		79B4368D1913913500FB4832 /* RemoteURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79B4368B1913913500FB4832 /* RemoteURLs.plist */; };
 		79B6595E1915FF1600D3B32F /* MERThumbnailKitCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B6595D1915FF1600D3B32F /* MERThumbnailKitCommon.m */; };
@@ -72,6 +70,7 @@
 		79B65B1F191A8ED000D3B32F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79B65B1D191A8ED000D3B32F /* InfoPlist.strings */; };
 		79B65B29191A92FE00D3B32F /* webview_script.js in Resources */ = {isa = PBXBuildFile; fileRef = 79B65B24191A91D500D3B32F /* webview_script.js */; };
 		79B65B2A191A932100D3B32F /* MERThumbnailKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 79B65B17191A8ED000D3B32F /* MERThumbnailKitResources.bundle */; };
+		8088412825778F6700C4555D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8088412725778F6700C4555D /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,9 +194,8 @@
 		79B4366519133D3100FB4832 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		79B4366719133D3600FB4832 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		79B4367F191344BC00FB4832 /* MERThumbnailKit.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = MERThumbnailKit.xcconfig; sourceTree = "<group>"; };
-		79B4368119135CD700FB4832 /* Files */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Files; sourceTree = "<group>"; };
-		79B4368819137E0000FB4832 /* UIWebView+MERThumbnailKitExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+MERThumbnailKitExtensions.h"; sourceTree = "<group>"; };
-		79B4368919137E0000FB4832 /* UIWebView+MERThumbnailKitExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+MERThumbnailKitExtensions.m"; sourceTree = "<group>"; };
+		79B4368819137E0000FB4832 /* WKWebView+MERThumbnailKitExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+MERThumbnailKitExtensions.h"; sourceTree = "<group>"; };
+		79B4368919137E0000FB4832 /* WKWebView+MERThumbnailKitExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+MERThumbnailKitExtensions.m"; sourceTree = "<group>"; };
 		79B4368B1913913500FB4832 /* RemoteURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RemoteURLs.plist; sourceTree = "<group>"; };
 		79B6595C1915FF1600D3B32F /* MERThumbnailKitCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MERThumbnailKitCommon.h; sourceTree = "<group>"; };
 		79B6595D1915FF1600D3B32F /* MERThumbnailKitCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MERThumbnailKitCommon.m; sourceTree = "<group>"; };
@@ -209,6 +207,7 @@
 		79B65B1E191A8ED000D3B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		79B65B20191A8ED000D3B32F /* MERThumbnailKitResources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MERThumbnailKitResources-Prefix.pch"; sourceTree = "<group>"; };
 		79B65B24191A91D500D3B32F /* webview_script.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = webview_script.js; sourceTree = "<group>"; };
+		8088412725778F6700C4555D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.5.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		BD8AC61140764E40A10B186E /* libPods-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5ED67B294AE4F6985C2D528 /* Pods-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.xcconfig"; path = "Pods/Pods-ios.xcconfig"; sourceTree = "<group>"; };
 		F46C2A2EBEDB401C87B925EA /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,6 +257,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8088412825778F6700C4555D /* WebKit.framework in Frameworks */,
 				79B4366819133D3600FB4832 /* Accelerate.framework in Frameworks */,
 				79B4366619133D3100FB4832 /* AVFoundation.framework in Frameworks */,
 				79B435F2191329AE00FB4832 /* libMERThumbnailKit.a in Frameworks */,
@@ -322,6 +322,7 @@
 		79B434DF19130DE900FB4832 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8088412725778F6700C4555D /* WebKit.framework */,
 				79B4366719133D3600FB4832 /* Accelerate.framework */,
 				79B4366519133D3100FB4832 /* AVFoundation.framework */,
 				79B434E019130DE900FB4832 /* Foundation.framework */,
@@ -443,7 +444,6 @@
 		79B4358B191328F000FB4832 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				79B4368119135CD700FB4832 /* Files */,
 				79B4358C191328F000FB4832 /* MERThumbnailKitDemoiOS-Info.plist */,
 				79B4358D191328F000FB4832 /* InfoPlist.strings */,
 				79B43590191328F000FB4832 /* main.m */,
@@ -484,8 +484,8 @@
 				79B435FF19132CBD00FB4832 /* MERThumbnailKitFunctions.m */,
 				79B659691916166C00D3B32F /* NSURLRequest+MERThumbnailKitExtensions.h */,
 				79B6596A1916166C00D3B32F /* NSURLRequest+MERThumbnailKitExtensions.m */,
-				79B4368819137E0000FB4832 /* UIWebView+MERThumbnailKitExtensions.h */,
-				79B4368919137E0000FB4832 /* UIWebView+MERThumbnailKitExtensions.m */,
+				79B4368819137E0000FB4832 /* WKWebView+MERThumbnailKitExtensions.h */,
+				79B4368919137E0000FB4832 /* WKWebView+MERThumbnailKitExtensions.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -672,6 +672,9 @@
 					79B4351D19130E2000FB4832 = {
 						TestTargetID = 79B4350819130E2000FB4832;
 					};
+					79B43585191328EF00FB4832 = {
+						DevelopmentTeam = 367BCS6SGL;
+					};
 				};
 			};
 			buildConfigurationList = 790E33BC19130C8F0040C38C /* Build configuration list for PBXProject "MERThumbnailKit" */;
@@ -679,6 +682,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -729,7 +733,6 @@
 			files = (
 				79B65B2A191A932100D3B32F /* MERThumbnailKitResources.bundle in Resources */,
 				79B4368C1913913500FB4832 /* RemoteURLs.plist in Resources */,
-				79B4368219135CD700FB4832 /* Files in Resources */,
 				79B435A0191328F000FB4832 /* Images.xcassets in Resources */,
 				79B4358F191328F000FB4832 /* InfoPlist.strings in Resources */,
 			);
@@ -742,7 +745,6 @@
 				79B435C91913292800FB4832 /* InfoPlist.strings in Resources */,
 				79B435D71913292800FB4832 /* Images.xcassets in Resources */,
 				79B4368D1913913500FB4832 /* RemoteURLs.plist in Resources */,
-				79B4368319135CD700FB4832 /* Files in Resources */,
 				79B435CF1913292800FB4832 /* Credits.rtf in Resources */,
 				79B435D51913292800FB4832 /* MainMenu.xib in Resources */,
 			);
@@ -799,7 +801,7 @@
 				79B6595E1915FF1600D3B32F /* MERThumbnailKitCommon.m in Sources */,
 				79B43537191312AD00FB4832 /* MERThumbnailManager.m in Sources */,
 				79B6596C1916166C00D3B32F /* NSURLRequest+MERThumbnailKitExtensions.m in Sources */,
-				79B4368A19137E0000FB4832 /* UIWebView+MERThumbnailKitExtensions.m in Sources */,
+				79B4368A19137E0000FB4832 /* WKWebView+MERThumbnailKitExtensions.m in Sources */,
 				79B4360119132CBD00FB4832 /* MERThumbnailKitFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1348,6 +1350,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 367BCS6SGL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -1398,6 +1401,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 367BCS6SGL;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1663,6 +1667,7 @@
 				79B65B22191A8ED000D3B32F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

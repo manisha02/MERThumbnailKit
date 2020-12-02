@@ -1,5 +1,5 @@
 //
-//  UIWebView+MERThumbnailKitExtensions.m
+//  WKWebView+MERThumbnailKitExtensions.m
 //  MERThumbnailKit
 //
 //  Created by William Towe on 5/2/14.
@@ -11,12 +11,12 @@
 //
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "UIWebView+MERThumbnailKitExtensions.h"
+#import "WKWebView+MERThumbnailKitExtensions.h"
 #import <ReactiveCocoa/RACSubscriber.h>
 
 #import <objc/runtime.h>
 
-@implementation UIWebView (MERThumbnailKitExtensions)
+@implementation WKWebView (MERThumbnailKitExtensions)
 
 static void const *kMER_subscriberKey = &kMER_subscriberKey;
 

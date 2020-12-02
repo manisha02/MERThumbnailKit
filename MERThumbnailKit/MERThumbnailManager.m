@@ -20,13 +20,14 @@
 #import <ReactiveCocoa/RACDelegateProxy.h>
 #import <libextobjc/EXTScope.h>
 #import <AVFoundation/AVFoundation.h>
+#import <WebKit/WebKit.h>
 
 #if (TARGET_OS_IPHONE)
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <UIKit/UIApplication.h>
 
 #import "UIImage+MERThumbnailKitExtensions.h"
-#import "UIWebView+MERThumbnailKitExtensions.h"
+#import "WKWebView+MERThumbnailKitExtensions.h"
 
 #define MERThumbnailKitImageClass UIImage
 #else
@@ -49,7 +50,7 @@ static NSString *const kMERThumbnailManagerDownloadFileCacheDirectoryName = @"do
 static NSString *const kMERThumbnailManagerThumbnailFileCacheDirectoryName = @"thumbnails";
 
 #if (TARGET_OS_IPHONE)
-@interface MERThumbnailManager () <UIWebViewDelegate,NSCacheDelegate,NSURLSessionDownloadDelegate,NSURLSessionDataDelegate>
+@interface MERThumbnailManager () <WKUIDelegate,WKNavigationDelegate,NSCacheDelegate,NSURLSessionDownloadDelegate,NSURLSessionDataDelegate>
 #else
 @interface MERThumbnailManager () <NSCacheDelegate,NSURLSessionDownloadDelegate,NSURLSessionDataDelegate>
 #endif
@@ -75,7 +76,7 @@ static NSString *const kMERThumbnailManagerThumbnailFileCacheDirectoryName = @"t
 - (MERThumbnailKitImageClass *)_imageFromCGPDFDocument:(CGPDFDocumentRef)documentRef size:(CGSize)size page:(NSInteger)page;
 
 #if (TARGET_OS_IPHONE)
-- (void)_generateThumbnailFromWebView:(UIWebView *)webView;
+- (void)_generateThumbnailFromWebView:(WKWebView *)webView;
 #endif
 
 - (RACSignal *)_imageThumbnailForURL:(NSURL *)url size:(CGSize)size;
@@ -213,22 +214,29 @@ static NSString *const kMERThumbnailManagerThumbnailFileCacheDirectoryName = @"t
     [subscriber sendNext:RACTuplePack(downloadTask.originalRequest.URL,url,@(MERThumbnailManagerCacheTypeNone))];
     [subscriber sendCompleted];
 }
-#pragma mark UIWebViewDelegate
+#pragma mark WKWebViewDelegate
 
 #if (TARGET_OS_IPHONE)
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([request.URL.absoluteString rangeOfString:@"orgmaestromerthumbnailkit:ready"].length > 0) {
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+//    if let url = navigationAction.request.url {
+//        print(url.absoluteString)
+//    }
+    
+    if ([navigationAction.request.URL.absoluteString rangeOfString:@"orgmaestromerthumbnailkit:ready"].length > 0) {
         [self performSelector:@selector(_generateThumbnailFromWebView:) withObject:webView afterDelay:0.0];
-        return NO;
+        decisionHandler(WKNavigationActionPolicyCancel);
+    } else {
+        decisionHandler(WKNavigationActionPolicyAllow);
     }
-    return YES;
 }
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
     NSInteger count = webView.MER_concurrentRequestCount;
     
     [webView setMER_concurrentRequestCount:++count];
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     NSInteger count = webView.MER_concurrentRequestCount;
     
     [webView setMER_concurrentRequestCount:--count];
@@ -244,20 +252,25 @@ static NSString *const kMERThumbnailManagerThumbnailFileCacheDirectoryName = @"t
     
     [webView setMER_subscriber:nil];
     [webView setMER_originalURL:nil];
-    [webView setDelegate:nil];
+    [webView setUIDelegate:nil];
     [webView stopLoading];
     [webView removeFromSuperview];
 }
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     NSURL *url = webView.MER_originalURL;
     
     if (url.isFileURL) {
         [self _generateThumbnailFromWebView:webView];
     }
     else {
-        [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithContentsOfURL:[MERThumbnailKitResourcesBundle() URLForResource:@"webview_script" withExtension:@"js"] encoding:NSUTF8StringEncoding error:NULL]];
+      //  [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithContentsOfURL:[MERThumbnailKitResourcesBundle() URLForResource:@"webview_script" withExtension:@"js"] encoding:NSUTF8StringEncoding error:NULL]];
+        [webView evaluateJavaScript:[NSString stringWithContentsOfURL:[MERThumbnailKitResourcesBundle() URLForResource:@"webview_script" withExtension:@"js"] encoding:NSUTF8StringEncoding error:NULL] completionHandler:^(id someId, NSError * error) {
+            
+        }];
     }
 }
+
 #endif
 
 #pragma mark *** Public Methods ***
@@ -585,10 +598,10 @@ static NSString *const kMERThumbnailManagerThumbnailFileCacheDirectoryName = @"t
     return retval;
 }
 #if (TARGET_OS_IPHONE)
-- (void)_generateThumbnailFromWebView:(UIWebView *)webView; {
+- (void)_generateThumbnailFromWebView:(WKWebView *)webView; {
     NSParameterAssert(webView);
     
-    [webView setDelegate:nil];
+    [webView setUIDelegate:nil];
     [webView stopLoading];
     
     id<RACSubscriber> subscriber = webView.MER_subscriber;
@@ -802,12 +815,21 @@ static NSString *const kMERThumbnailManagerThumbnailFileCacheDirectoryName = @"t
             MEDispatchMainAsync(^{
                 @strongify(self);
                 
+                NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+
+                WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+                WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+                [wkUController addUserScript:wkUScript];
+
+                WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+                wkWebConfig.userContentController = wkUController;
+
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                UIWebView *webView = [[UIWebView alloc] initWithFrame:window.bounds];
+                WKWebView *webView = [[WKWebView alloc] initWithFrame:window.bounds configuration:wkWebConfig];
                 
                 [webView setUserInteractionEnabled:NO];
-                [webView setScalesPageToFit:YES];
-                [webView setDelegate:self];
+               // [webView setScalesPageToFit:YES];
+                [webView setUIDelegate:self];
                 [webView setMER_subscriber:subscriber];
                 [webView setMER_originalURL:url];
                 

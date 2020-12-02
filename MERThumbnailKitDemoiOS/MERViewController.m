@@ -39,7 +39,6 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
     [self.imageView setFrame:self.contentView.bounds];
 }
 
@@ -59,17 +58,17 @@
     if (!(self = [super init]))
         return nil;
     
-    NSDirectoryEnumerator *directoryEnum = [[NSFileManager defaultManager] enumeratorAtURL:[[NSBundle mainBundle] URLForResource:@"Files" withExtension:nil] includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsSubdirectoryDescendants|NSDirectoryEnumerationSkipsPackageDescendants|NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *error) {
-        MELogObject(error);
-        return YES;
-    }];
+//    NSDirectoryEnumerator *directoryEnum = [[NSFileManager defaultManager] enumeratorAtURL:[[NSBundle mainBundle] URLForResource:@"Files" withExtension:nil] includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsSubdirectoryDescendants|NSDirectoryEnumerationSkipsPackageDescendants|NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *error) {
+//        MELogObject(error);
+//        return YES;
+//    }];
     
-    NSMutableArray *urls = [[NSMutableArray alloc] init];
+    NSMutableArray *urls = [[NSMutableArray alloc] initWithObjects:[NSURL URLWithString:@"https://obs.eu-de.otc.t-systems.com/cardonia/276424/0002/9017/L9Os4xgo.mp4"], nil];
     
-    for (NSString *urlString in [NSArray arrayWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"RemoteURLs" withExtension:@"plist"]])
-        [urls addObject:[NSURL URLWithString:urlString]];
+//    for (NSString *urlString in [NSArray arrayWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"RemoteURLs" withExtension:@"plist"]])
+//        [urls addObject:[NSURL URLWithString:urlString]];
     
-    [self setUrls:[urls arrayByAddingObjectsFromArray:directoryEnum.allObjects]];
+    [self setUrls:urls];
     
     return self;
 }
